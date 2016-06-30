@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical"
+    android:background="@color/order_stockup_bottom_color"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/order_list_magin_10"
+        android:layout_weight="2">
+        <TextView
+            android:id="@+id/tv_normal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/order_text_font_h_color_333333"
+            android:text="总配送数量 : "/>
+        <TextView
+            android:id="@+id/tv_or_stockup_total_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_normal1"
+            android:textSize="16sp"
+            android:textColor="@color/order_text_font_h_color_333333"
+            android:text="0"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/btn_stockup_submit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/seloctor_btn_commit_unradian"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="提交"
+            />
+            <!--android:background="@color/order_timer_bg_2ebbed"-->
+    </RelativeLayout>
+</LinearLayout>

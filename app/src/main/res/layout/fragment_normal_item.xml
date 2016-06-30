@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/order_contnet_ll">
+        <TextView
+            style="@style/order_contnet_left"
+            android:paddingTop="@dimen/order_list_magin_10"
+            android:text="主条码"/>
+        <TextView
+            android:id="@+id/tv_normal_main_code"
+            style="@style/order_contnet_right"
+            android:paddingTop="@dimen/order_list_magin_10"
+            android:text="124142352353"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/order_contnet_ll">
+        <TextView
+            style="@style/order_contnet_left"
+            android:text="批次码"/>
+        <TextView
+            android:id="@+id/tv_normal_se_code"
+            style="@style/order_contnet_right"
+            android:text="124142352353"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/order_contnet_ll">
+        <TextView
+            style="@style/order_contnet_left"
+            android:text="生产批号"/>
+        <TextView
+            android:id="@+id/tv_normal_produce_num"
+            style="@style/order_contnet_right"
+            android:text="P52353"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/order_contnet_ll">
+        <TextView
+            style="@style/order_contnet_left"
+            android:text="灭菌批号"/>
+        <TextView
+            android:id="@+id/tv_normal_sterilisatio_num"
+            style="@style/order_contnet_right"
+            android:text="B52353"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/order_contnet_ll">
+        <TextView
+            style="@style/order_contnet_left"
+            android:text="库存数量"/>
+        <TextView
+            android:id="@+id/tv_normal_stock_num"
+            style="@style/order_contnet_right"
+            android:textColor="@color/order_text_color_ea5967"
+            android:text="53"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/order_contnet_ll"
+        android:layout_marginBottom="@dimen/order_list_magin_10">
+        <TextView
+            style="@style/order_contnet_left"
+            android:text="失效日期"/>
+        <TextView
+            android:id="@+id/tv_normal_date"
+            style="@style/order_contnet_right"
+            android:text="2016-02-24"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="@dimen/order_list_magin_10"
+        android:background="@color/order_line_color_color_c6c5ca"
+        />
+
+    <include layout="@layout/fragment_order_add_minus"/>
+
+</LinearLayout>

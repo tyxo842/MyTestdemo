@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/order_bg_cccccc"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_nodata_bg"
+        android:layout_marginTop="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_zanwu"
+        android:visibility="visible"/>
+    <!--android:background="@drawable/nodata_bg_white"-->
+
+    <TextView
+        android:id="@+id/empty_bg_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:text="抱歉，没有找到相关数据"
+        android:textColor="@color/text_black_light_99"
+        android:textSize="13sp"/>
+
+</LinearLayout>

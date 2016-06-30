@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myapp="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:layout_marginRight="@dimen/order_list_magin_10"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="@dimen/order_list_magin_10"
+        android:gravity="center"
+        android:layout_centerVertical="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="配送数量"
+            android:textColor="@color/order_timer_bg_2ebbed"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/ll_addsubview"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imbtn_minus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_jian"/>
+
+        <TextView
+            android:id="@+id/et_dipatch_total_num"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:background="@drawable/selector_order_item_unradian"
+            android:gravity="center"
+            android:textColor="@color/order_text_font_h_color_333333"
+            android:inputType="number"
+            android:text="0"/>
+            <!--android:enabled="false"-->
+
+        <ImageButton
+            android:id="@+id/imbtn_add"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="-1dp"
+            android:src="@drawable/icon_jia"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

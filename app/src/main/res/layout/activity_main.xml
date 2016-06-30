@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="com.company.tyxo.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <requestFocus/>
+
+        <EditText
+            android:id="@+id/et_product_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_product_id" />
+
+        <EditText
+            android:id="@+id/et_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_product_name" />
+
+        <EditText
+            android:id="@+id/et_product_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_product_count" />
+
+        <EditText
+            android:id="@+id/et_product_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_product_price" />
+
+        <Button
+            android:id="@+id/bt_create_prepaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/bt_create_list" />
+
+        <Button
+            android:id="@+id/bt_onkey_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/bt_onkey_pay" />
+
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="一些别的测试字符截取" />
+
+        <Button
+            android:id="@+id/btn_test2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="一些别的测试2debug调试" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#666666"
+            >
+            <ImageView
+                android:id="@+id/im_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                />
+            <TextView
+                android:layout_toRightOf="@id/im_imageview"
+                android:padding="20dp"
+                android:background="#006666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:text="长按或双击复制textview内容"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/im_imageview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            />
+
+        <Button
+            android:id="@+id/tv_webview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击打开webView"/>
+
+        <Button
+            android:id="@+id/btn_tablayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击打开tablayoutActivity"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"/>
+    </LinearLayout>
+
+</ScrollView>
+

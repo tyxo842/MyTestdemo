@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- layout 布局适配 -->
+
+    <style name="layout_ff">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="layout_mm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_ww">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_fw">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_wf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="layout_mw">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_wm">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_0w">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_w0">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="layout_0m">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_m0">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <!-- actionbar -->
+    <style name="actionbar_title" parent="layout_ww">
+        <item name="android:maxLength">10</item>
+        <item name="android:paddingLeft">10dp</item>
+         <item name="android:paddingRight">10dp</item>
+         
+          <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="actionbar_save" parent="layout_ww">
+        <item name="android:maxLength">10</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="actionbar_icon">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+
+    <style name="linear_mwh" parent="layout_mw">
+     <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="linear_mwv" parent="layout_mw">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+    <!--订单条目内容 父 左 右-->
+    <style name="order_contnet_ll">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/order_list_magin_10</item>
+        <item name="android:layout_marginRight">@dimen/order_list_magin_10</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+        <!--<item name="android:gravity">center</item>-->
+    <style name="order_contnet_left">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/order_text_font_color_666666</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="order_contnet_right">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:layout_weight">9</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/order_text_font_h_color_333333</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!--新增非条码备货-->
+    <style name="order_add_unbarcode_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/order_text_font_color_666666</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="order_add_unbarcode_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/order_text_font_h_color_333333</item>
+        <item name="android:textColorHint">@color/order_dialog_hint_color</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/order_list_magin_10</item>
+        <item name="android:paddingLeft">@dimen/order_list_magin_10</item>
+        <item name="android:background">@drawable/selector_order_list_item_radian_2</item>
+    </style>
+
+</resources>

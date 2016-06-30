@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f3f5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--android:background="@drawable/shape_search_bg"-->
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <requestFocus />
+        </LinearLayout>
+        <!-- <com.searainbow.enterpriseplat.ui.widget.AutoClearEditText-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/btn_barcode_search"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/order_list_magin_10"
+                android:layout_marginRight="@dimen/order_list_magin_10"
+                android:layout_marginTop="@dimen/order_list_magin_10"
+                android:background="@drawable/selector_order_list_item_radian_2"
+                android:drawableLeft="@drawable/search_icon"
+                android:gravity="center"
+                android:hint="请输入批次码"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingLeft="@dimen/order_list_magin_10"
+                android:paddingRight="@dimen/order_list_magin_10"
+                android:textColor="#999999"
+                android:textSize="13sp" />
+            <!--android:background="@drawable/stockup_btn_sumbit"-->
+
+            <TextView
+                android:id="@+id/tv_order_normal_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="@dimen/order_list_magin_10"
+                android:drawableLeft="@drawable/edit_delete_icon"
+                android:gravity="center"
+                android:text="取消"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_order_nomal_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ptrlv_order_list_o"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6"
+                    android:background="@color/order_bg_cccccc"
+                    android:divider="@color/order_bg_cccccc"
+                    android:dividerHeight="10dp"
+                    android:scrollbars="none"
+
+                    />
+
+                <include
+                    android:id="@+id/fragment_normal_bottom"
+                    layout="@layout/fragment_stockup_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pb_order_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="160dp"
+                android:background="@drawable/order_progressbar_bg"
+                android:padding="10dp"
+                android:visibility="invisible" />
+
+            <include
+                android:id="@+id/ll_order_nodata_bg"
+                layout="@layout/layout_order_search_nodata_bg"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
