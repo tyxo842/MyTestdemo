@@ -1,17 +1,19 @@
 package com.company.tyxo;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,7 +24,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-
 import com.company.tyxo.constants.Constants;
 import com.company.tyxo.ui.ImageViewerActivity;
 import com.company.tyxo.ui.TabLayoutActivity;
@@ -30,7 +31,9 @@ import com.company.tyxo.ui.WebViewActivity;
 import com.company.tyxo.util.DialogHelper;
 import com.company.tyxo.util.HttpUtil;
 import com.company.tyxo.util.MyAsyncTask;
+import com.company.tyxo.utils.BadgeUtil;
 import com.company.tyxo.utils.ToastUtil;
+import com.company.tyxo.utils.log.HLog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,18 +41,24 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 已有功能:
+ *  微信支付
+ *  glide图片加载 --> 看图+长按保+单击
+ *  webview
+ *  tabLayout
+ *  HLog
+ *  icon 上角数字(未读数字) --->三个方法,均未起作用 ①(ActivityAlias2); ② (ShortcutBadger-master); ③.
+ * */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnLongClickListener {
 
-    private Button createPrePay;
-    private Button onkeyPay;
-    private Button btn_test;
-    private Button btn_test2;
-    private Button tv_webview;
-    private Button btn_tablayout;
+    private Button createPrePay ,onkeyPay, btn_test, btn_test2,tv_webview, btn_tablayout;
 
     private ImageView imageView;
     private EditText et_product_id;
     private String url; // webView 加载的url
+
+    private Button btnSet, btnClean ,btn_iconnum_set2;//icon 未读消息
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_tablayout = (Button) findViewById(R.id.btn_tablayout);
 
         imageView = (ImageView) findViewById(R.id.im_imageview2);
-//        imageView = (ImageView) findViewById(R.id.im_imageview);
+        // imageView = (ImageView) findViewById(R.id.im_imageview);
         et_product_id = (EditText) findViewById(R.id.et_product_id);
+
+        btnSet = (Button) findViewById(R.id.btn_iconnum_set);
+        btnClean = (Button) findViewById(R.id.btn_iconnum_clean);
+        btn_iconnum_set2 = (Button) findViewById(R.id.btn_iconnum_set2);
 
         // String url = "http://img4.imgtn.bdimg.com/it/u=3656820678,353780200&fm=11&gp=0.jpg";
         url = "http://b164.photo.store.qq.com/psb?/V11IXfXu1OApUM/bRbBm8FNRXVXb*BGLmN4IM2UtDkHFiAuLRcuGcv7RRQ!/b/dL54w2GxAQAA&bo=IANYAgAAAAABAF4!&rf=viewer_4";
@@ -81,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageView.setOnLongClickListener(this);
         et_product_id.setOnKeyListener(onKeyListener);
 
+        btnSet.setOnClickListener(this);
+        btnClean.setOnClickListener(this);
+        btn_iconnum_set2.setOnClickListener(this);
+
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);// 强制横屏设置
     }
 
@@ -89,9 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (this.getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE) {
-            Log.i("tyxo", "onConfigurationChanged 屏幕  横屏");
+            HLog.i("tyxo", "onConfigurationChanged 屏幕  横屏");
         }else if(this.getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT) {
-            Log.i("tyxo", "onConfigurationChanged 屏幕  竖屏");
+            HLog.i("tyxo", "onConfigurationChanged 屏幕  竖屏");
         }
     }
 
@@ -99,10 +116,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
+            case R.id.btn_iconnum_set:  /** ② : 改变icon上角数字 */
+                BadgeUtil.setBadgeCount(getApplicationContext(), 35);
+                break;
+            case R.id.btn_iconnum_clean: // 恢复icon上角数字
+                BadgeUtil.resetBadgeCount(getApplicationContext());
+                break;
+            case R.id.btn_iconnum_set2: /** ③ : 改变icon上角数字 */
+                changeIconSecond();
+                break;
             case R.id.bt_create_prepaylist:
                 createPrePayList();
                 break;
             case R.id.bt_onkey_pay:
+
                 break;
             case R.id.btn_tablayout:
             {
@@ -117,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
                 break;
             case R.id.im_imageview2:
-                Log.i("tyxo", "imageview 点击 ImageViewerActivity");
+                HLog.i("tyxo", "imageview 点击 ImageViewerActivity");
 
                 Intent intent = new Intent(this, ImageViewerActivity.class);
                 intent.putExtra("url", url);
@@ -138,18 +165,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String[] strs = s.split(regEx);
                 for (int i = 0; i < strs.length; i++) {
-                    Log.i("tyxo","分割出来的内容: "+ strs[i]);
+                    HLog.i("tyxo","分割出来的内容: "+ strs[i]);
                 }
 
                 while(mat.find()){
-                    Log.i("tyxo","截取出来的内容: "+ mat.group());
+                    HLog.i("tyxo","截取出来的内容: "+ mat.group());
                 }
                 break;
 
             case R.id.btn_test2:
                 for (int i = 0; i < 10; i++) {
                     int selector = i;
-                    Log.i("tyxo","for当前i的值: "+i);
+                    HLog.i("tyxo","for当前i的值: "+i);
 
                     nextMethod(i);
                 }
@@ -181,11 +208,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /** ③ : 更改图标 创建快捷方式         ps: 不管用 */
+    private void changeIconSecond() {
+
+        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        BitmapDrawable iconBitmapDrawablel = null;
+
+        // 获取应用基本信息
+        String label = this.getPackageName();
+        PackageManager packageManager = getPackageManager();
+        try {
+            iconBitmapDrawablel = (BitmapDrawable) packageManager.getApplicationIcon(label);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // 设置属性
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON, iconBitmapDrawablel.getBitmap());
+        // 是否允许重复创建 -- false --> 否
+        shortcut.putExtra("duplicate", false);
+        // 设置启动程序
+        ComponentName comp = new ComponentName(label, "." + this.getLocalClassName());
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, new Intent(Intent.ACTION_MAIN).setComponent(comp));
+
+        sendBroadcast(shortcut);
+    }
+
+    // 手机软键盘 展开与关闭
     private View.OnKeyListener onKeyListener = new View.OnKeyListener() {
 
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
-            Log.i("tyxo","keyCode : "+keyCode);
+            HLog.i("tyxo","keyCode : "+keyCode);
             if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
                 //隐藏软键盘
                 InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -198,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    /** 加载图片 */
     /*private SimpleTarget target = new SimpleTarget<Bitmap>() {
 
         @Override
@@ -215,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     private void nextMethod(int i) {
-        Log.i("tyxo", "方法处i的值: " + i);
+        HLog.i("tyxo", "方法处i的值: " + i);
     }
 
     private void createPrePayList() {
@@ -223,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prePayAsynTask.execute();
     }
 
+    /** 长按保存事件 */
     @Override
     public boolean onLongClick(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -241,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    /** 保存图片 */
     private class SaveImageTask extends AsyncTask<Bitmap, Void, String> {
         @Override
         protected String doInBackground(Bitmap... params) {
@@ -270,11 +328,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String result) {
             ToastUtil.showToastS(getApplicationContext(),result);
-
             imageView.setDrawingCacheEnabled(false);
         }
     }
-
 
     class PrePayAsynTask extends MyAsyncTask {
         private byte[] result;
@@ -304,8 +360,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void doInBackground() {
             result = HttpUtil.httpGet(Constants.PREPAYLIST_URL_TEST);
 //            result = HttpUtil.httpPost(" ".getBytes(), Constants.PREPAYLIST_URL_TEST);
-            Log.i("tyxo", "HttpUtil result : " + new String(result));
+            HLog.i("tyxo", "HttpUtil result : " + new String(result));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
 

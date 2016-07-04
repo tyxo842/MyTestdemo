@@ -107,6 +107,24 @@
             android:layout_height="wrap_content"
             android:text="点击打开tablayoutActivity"/>
 
+        <Button
+            android:id="@+id/btn_iconnum_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="设置数字为35" />
+
+        <Button
+            android:id="@+id/btn_iconnum_clean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清除数字" />
+
+        <Button
+            android:id="@+id/btn_iconnum_set2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清除数字_快捷方式" />
+
 
 
 

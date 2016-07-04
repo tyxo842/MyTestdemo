@@ -89,6 +89,7 @@ public class TabLayoutActivity extends AppCompatActivity {
 //        mFragments.append(7,new FragmentNormal());
         myTabAdapter = new MyTabAdapter(getSupportFragmentManager());
         vp_viewpager.setAdapter(myTabAdapter);
+        vp_viewpager.setCurrentItem(1); // 默认显示第二个fragment
         vp_viewpager.setOffscreenPageLimit(2);//预加载个数,少的可以用,防止快速切换卡顿
     }
 
