@@ -9,12 +9,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_vertical_margin"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        >
-        <requestFocus/>
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <requestFocus />
 
         <EditText
             android:id="@+id/et_product_id"
@@ -67,80 +67,107 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="一些别的测试2debug调试" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#666666"
-            >
+            android:background="#666666">
+
             <ImageView
                 android:id="@+id/im_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                />
+                android:clickable="true" />
+
             <TextView
-                android:layout_toRightOf="@id/im_imageview"
-                android:padding="20dp"
-                android:background="#006666"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:text="长按或双击复制textview内容"/>
+                android:layout_toRightOf="@id/im_imageview"
+                android:background="#006666"
+                android:padding="20dp"
+                android:text="长按或双击复制textview内容"
+                android:textIsSelectable="true" />
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/im_imageview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            />
+            android:clickable="true" />
 
         <Button
             android:id="@+id/tv_webview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="点击打开webView"/>
+            android:text="点击打开webView" />
 
         <Button
             android:id="@+id/btn_tablayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="点击打开tablayoutActivity"/>
+            android:text="点击打开tablayoutActivity" />
 
         <Button
             android:id="@+id/btn_iconnum_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="设置数字为35" />
+            android:text="设置数字为35(不起作用)" />
 
         <Button
             android:id="@+id/btn_iconnum_clean"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="清除数字" />
+            android:text="清除数字(不起作用)" />
 
         <Button
             android:id="@+id/btn_iconnum_set2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="清除数字_快捷方式" />
+            android:text="清除数字_快捷方式(不起作用)" />
 
+        <RelativeLayout
+            android:background="@color/order_bg_f0f3f5"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/textViewHomePackage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
 
+            <EditText
+                android:id="@+id/numInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewHomePackage"
+                android:inputType="numberDecimal" />
 
+            <Button
+                android:id="@+id/btnSetBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numInput"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="设置 badge" />
 
-
-
-
-
-
-
+            <Button
+                android:id="@+id/btnRemoveBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnSetBadge"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="清除 badge" />
+        </RelativeLayout>
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp" />
     </LinearLayout>
 
 </ScrollView>

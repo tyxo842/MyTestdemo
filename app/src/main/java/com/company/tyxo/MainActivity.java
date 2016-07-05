@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +21,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -41,6 +44,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.leolin.shortcutbadger.ShortcutBadger;
+
 /**
  * 已有功能:
  *  微信支付
@@ -59,7 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText et_product_id;
     private String url; // webView 加载的url
 
-    private Button btnSet, btnClean ,btn_iconnum_set2;//icon 未读消息
+    private Button btnSet, btnClean ,btn_iconnum_set2;//icon 未读消息 -- 不起作用
+
+    /** 图标 上角 未读消息 ④ */
+    private EditText numInput;
+    private Button button, removeBadgeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnClean = (Button) findViewById(R.id.btn_iconnum_clean);
         btn_iconnum_set2 = (Button) findViewById(R.id.btn_iconnum_set2);
 
+        numInput = (EditText) findViewById(R.id.numInput);
+        button = (Button) findViewById(R.id.btnSetBadge);
+        removeBadgeBtn = (Button) findViewById(R.id.btnRemoveBadge);
+
         // String url = "http://img4.imgtn.bdimg.com/it/u=3656820678,353780200&fm=11&gp=0.jpg";
         url = "http://b164.photo.store.qq.com/psb?/V11IXfXu1OApUM/bRbBm8FNRXVXb*BGLmN4IM2UtDkHFiAuLRcuGcv7RRQ!/b/dL54w2GxAQAA&bo=IANYAgAAAAABAF4!&rf=viewer_4";
 
@@ -98,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSet.setOnClickListener(this);
         btnClean.setOnClickListener(this);
         btn_iconnum_set2.setOnClickListener(this);
+
+        button.setOnClickListener(this);
+        removeBadgeBtn.setOnClickListener(this);
+        initIntent();
 
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);// 强制横屏设置
     }
@@ -117,6 +134,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
+            case R.id.btnSetBadge:      /** ④ : 改变icon上角数字 */
+                setIconNumber();
+                break;
+            case R.id.btnRemoveBadge:   /** ④ : 改变icon上角数字 */
+                clearIconNumber();
+                break;
             case R.id.btn_iconnum_set:  /** ② : 改变icon上角数字 */
                 BadgeUtil.setBadgeCount(getApplicationContext(), 35);
                 break;
@@ -208,6 +231,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    /** ④ : 改变icon上角数字 start */
+    private void initIntent() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        ResolveInfo resolveInfo = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        String currentHomePackage = resolveInfo.activityInfo.packageName;
+
+        TextView textViewHomePackage = (TextView) findViewById(R.id.textViewHomePackage);
+        textViewHomePackage.setText("launcher:" + currentHomePackage);
+    }
+    private void clearIconNumber() {
+        boolean success = ShortcutBadger.removeCount(MainActivity.this);
+
+        Toast.makeText(getApplicationContext(), "success=" + success, Toast.LENGTH_SHORT).show();
+    }
+    private void setIconNumber() {
+        int badgeCount = 0;
+        try {
+            badgeCount = Integer.parseInt(numInput.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Error input", Toast.LENGTH_SHORT).show();
+        }
+
+        boolean success = ShortcutBadger.applyCount(MainActivity.this, badgeCount);
+
+        Toast.makeText(getApplicationContext(), "Set count=" + badgeCount + ", success=" + success, Toast.LENGTH_SHORT).show();
+    }/** ④ : 改变icon上角数字 end */
+
+
 
     /** ③ : 更改图标 创建快捷方式         ps: 不管用 */
     private void changeIconSecond() {
