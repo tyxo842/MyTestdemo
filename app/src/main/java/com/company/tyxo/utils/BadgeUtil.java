@@ -47,9 +47,6 @@ public class BadgeUtil {
             sendToSamsumg(context, count);
         } else if (Build.MANUFACTURER.toLowerCase().contains("huawei")) {
             sendToHuawei(context, count);
-            sendToXiaoMi(context, count);
-            sendToSony(context, count);
-            sendToSamsumg(context, count);
         } else {
             Toast.makeText(context, "Not Support", Toast.LENGTH_LONG).show();
         }
