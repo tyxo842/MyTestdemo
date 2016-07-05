@@ -49,6 +49,7 @@ import java.util.regex.Pattern;
  *  tabLayout
  *  HLog
  *  icon 上角数字(未读数字) --->三个方法,均未起作用 ①(ActivityAlias2); ② (ShortcutBadger-master); ③.
+ *
  * */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnLongClickListener {
 
