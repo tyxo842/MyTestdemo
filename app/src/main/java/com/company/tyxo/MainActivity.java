@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void clearIconNumber() {
         boolean success = ShortcutBadger.removeCount(MainActivity.this);
 
-        Toast.makeText(getApplicationContext(), "success=" + success, Toast.LENGTH_SHORT).show();
+        ToastUtil.showToastS(getApplicationContext(), "success=" + success);
     }
     private void setIconNumber() {
         int badgeCount = 0;
@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         boolean success = ShortcutBadger.applyCount(MainActivity.this, badgeCount);
 
-        Toast.makeText(getApplicationContext(), "Set count=" + badgeCount + ", success=" + success, Toast.LENGTH_SHORT).show();
+        ToastUtil.showToastS(getApplicationContext(),"Set count=" + badgeCount + ", success=" + success);
     }/** ④ : 改变icon上角数字 end */
 
 
