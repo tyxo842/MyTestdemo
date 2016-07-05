@@ -3,7 +3,7 @@ package com.company.tyxo.ui.manager;
 /**
  * Created by LiYang on 2016/7/4 15: 27.
  * Mail      1577441454@qq.com
- * Describe :
+ * Describe : 未用到,可以删除此类,来自反编译的qq5.0,内含错误未改完(混淆后)
  */
 public class hyr {
 

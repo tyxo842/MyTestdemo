@@ -3,6 +3,8 @@ package com.company.tyxo.utils;
 /**
  * 反编译的qq 5.0 代码有错误,未改
  * 涉及到的类 : hyr , ThreadManager
+ *
+ * 未用到,可以删除此类,来自反编译的qq5.0,内含错误未改完(混淆后)
  */
 public class BadgeUtil2 {
 
