@@ -1,1 +1,2 @@
-include ':app', ':ShortcutBadger'
+include ':app'
+include ':ShortcutBadger'
